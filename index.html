@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victorian Electorates</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header>
+    <h1>Victorian Electorates Directory</h1>
+  </header>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Consolidated Agency Performance</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">SDT <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Overview</a></li>
-          <li><a href="#">Monthly</a></li>
-          <li><a href="#">Cumulative</a></li>
-        </ul>
-      </li>
-      <li><a href="#">SAMS2</a></li>
-      <li><a href="#">Critical Incidents</a></li>
-    </ul>
-  </div>
-</nav>
-  
-<div class="container">
-  <h3>Navbar With Dropdown</h3>
-  <p>This example adds a dropdown menu for the "Page 1" button in the navigation bar.</p>
-</div>
+  <main>
+    <p>Select an electorate to open its own page with a map, current MP, and most recent election details.</p>
+    <section id="electorate-list" class="grid" aria-label="Electorate listing"></section>
+  </main>
 
+  <script src="data.js"></script>
+  <script>
+    const listContainer = document.getElementById('electorate-list');
+
+    window.electorates.forEach((electorate) => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `
+        <h2>${electorate.name}</h2>
+        <p class="meta">Region: ${electorate.region}</p>
+        <a class="button" href="electorates/${electorate.slug}.html">View electorate</a>
+      `;
+      listContainer.appendChild(card);
+    });
+  </script>
 </body>
 </html>
